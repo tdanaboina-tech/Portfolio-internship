@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accessible Personal Portfolio built strictly adhering to modern HTML5 semantic standards, WCAG 2.1 AA accessibility guidelines, and SEO best practices.">
+    <meta name="author" content="Alex Morgan">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Alex Morgan | Accessible Web Developer Portfolio">
+    <meta property="og:description" content="Full-stack developer focused on web accessibility, semantic HTML, and high-performance applications.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Alex+Morgan+Portfolio">
+
+    <title>Alex Morgan - Accessible Portfolio | Home</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome for Accessible Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* High Contrast Focus Ring for Keyboard Navigation */
+        :focus-visible {
+            outline: 3px solid #f59e0b !important;
+            outline-offset: 3px !important;
+        }
+
+        /* Screen Reader Only Utility Class */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Skip link visible on focus */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            background: #1e3a8a;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            z-index: 9999;
+            border-radius: 0.375rem;
+            font-weight: 700;
+            text-decoration: underline;
+            transition: top 0.2s ease-in-out;
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alex Morgan",
+      "jobTitle": "Accessibility & Frontend Engineer",
+      "url": "https://example.com",
+      "sameAs": [
+        "https://github.com",
+        "https://linkedin.com"
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- WCAG 2.4.1 Bypass Blocks -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Semantic Header with Banner Role -->
+    <header role="banner" class="sticky top-0 z-50 bg-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <!-- Brand Logo / Title -->
+            <div class="flex items-center space-x-3">
+                <a href="#home" onclick="navigateTo('home', 'Home')" class="text-xl sm:text-2xl font-bold tracking-tight text-white hover:text-brand-100 transition focus:rounded-md p-1" aria-label="Alex Morgan Home Portfolio">
+                    <span class="text-brand-500">&lt;</span>AlexMorgan<span class="text-brand-500">/&gt;</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav role="navigation" aria-label="Primary Navigation" class="hidden md:flex space-x-1 lg:space-x-2">
+                <button onclick="navigateTo('home', 'Home')" id="nav-home" aria-current="page" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-brand-600 text-white shadow-sm">
+                    Home
+                </button>
+                <button onclick="navigateTo('about', 'About Me')" id="nav-about" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-300 hover:bg-slate-800 hover:text-white">
+                    About
+                </button>
+                <button onclick="navigateTo('projects', 'Projects')" id="nav-projects" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-300 hover:bg-slate-800 hover:text-white">
+                    Projects
+                </button>
+                <button onclick="navigateTo('skills', 'Skills & Standards')" id="nav-skills" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-300 hover:bg-slate-800 hover:text-white">
+                    Skills
+                </button>
+                <button onclick="navigateTo('contact', 'Contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-300 hover:bg-slate-800 hover:text-white">
+                    Contact
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" 
+                    onclick="toggleMobileMenu()" 
+                    type="button" 
+                    class="md:hidden inline-flex items-center justify-center p-3 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none" 
+                    aria-controls="mobile-menu" 
+                    aria-expanded="false" 
+                    aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars text-xl" id="menu-icon" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" role="navigation" aria-label="Mobile Navigation" class="hidden md:hidden bg-slate-800 px-4 pt-2 pb-4 space-y-2 border-t border-slate-700">
+            <button onclick="navigateTo('home', 'Home'); toggleMobileMenu()" id="mobile-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-brand-600">
+                Home
+            </button>
+            <button onclick="navigateTo('about', 'About Me'); toggleMobileMenu()" id="mobile-nav-about" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">
+                About
+            </button>
+            <button onclick="navigateTo('projects', 'Projects'); toggleMobileMenu()" id="mobile-nav-projects" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">
+                Projects
+            </button>
+            <button onclick="navigateTo('skills', 'Skills & Standards'); toggleMobileMenu()" id="mobile-nav-skills" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">
+                Skills
+            </button>
+            <button onclick="navigateTo('contact', 'Contact'); toggleMobileMenu()" id="mobile-nav-contact" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">
+                Contact
+            </button>
+        </nav>
+    </header>
+
+    <!-- Screen Reader Announcement Live Region -->
+    <div id="sr-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Main Content Wrapper -->
+    <main id="main-content" role="main" tabindex="-1" class="flex-grow focus:outline-none max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="page-home" class="page-section space-y-12">
+            <!-- Hero Article -->
+            <article class="bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 text-white rounded-2xl p-8 sm:p-12 shadow-xl relative overflow-hidden">
+                <div class="max-w-3xl space-y-6 relative z-10">
+                    <div class="inline-flex items-center space-x-2 bg-brand-600/30 border border-brand-400/40 px-3 py-1.5 rounded-full text-sm font-medium text-brand-100">
+                        <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+                        <span>WCAG 2.1 AA Compliant & SEO Optimized</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Building Inclusive Web Experiences with <mark class="bg-brand-500 text-white px-2 py-0.5 rounded">Semantic HTML5</mark>
+                    </h1>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        Hi, I'm <strong class="text-white font-semibold">Alex Morgan</strong>. I am a Web Engineer specializing in accessible user interfaces, strict standards-compliant frontend architecture, and search-engine-optimized structure.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <button onclick="navigateTo('projects', 'Projects')" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-lg font-bold shadow-md transition flex items-center space-x-2">
+                            <span>Explore Projects</span>
+                            <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
+                        </button>
+                        <button onclick="navigateTo('contact', 'Contact')" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-bold transition flex items-center space-x-2 border border-slate-600">
+                            <span>Get In Touch</span>
+                            <i class="fa-solid fa-envelope text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Highlights Grid -->
+            <section aria-labelledby="highlights-title" class="space-y-6">
+                <h2 id="highlights-title" class="text-2xl font-bold text-slate-900 border-b-2 border-slate-200 pb-2">Core Competencies</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <article class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center mb-4 text-xl">
+                            <i class="fa-solid fa-code" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Semantic Structure</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Utilizing true semantic tags like <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-xs">&lt;main&gt;</code>, <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-xs">&lt;article&gt;</code>, and <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-xs">&lt;section&gt;</code> for optimal DOM readability and SEO.
+                        </p>
+                    </article>
+                    <article class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-green-100 text-green-700 rounded-lg flex items-center justify-center mb-4 text-xl">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">ARIA & Screen Readers</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Ensuring flawless screen reader compatibility with <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-xs">aria-label</code>, <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-xs">aria-live</code>, and landmarks.
+                        </p>
+                    </article>
+                    <article class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-lg flex items-center justify-center mb-4 text-xl">
+                            <i class="fa-solid fa-keyboard" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Keyboard Navigation</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Complete tab-navigable workflows, clear outline focus states, and skip links conforming to WCAG 2.4.7 guidelines.
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </section>
+
+        <!-- ================= PAGE 2: ABOUT ================= -->
+        <section id="page-about" class="page-section space-y-8 hidden">
+            <header class="border-b border-slate-200 pb-4">
+                <h1 class="text-3xl font-extrabold text-slate-900">About Me</h1>
+                <p class="text-slate-600 mt-1">Standards Advocate, Frontend Engineer, and Web Accessibility Specialist.</p>
+            </header>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Profile Image Figure -->
+                <figure class="bg-white p-4 border border-slate-200 rounded-xl shadow-sm text-center">
+                    <img src="https://placehold.co/400x400/1e293b/ffffff?text=Alex+Morgan+Dev" 
+                         alt="Alex Morgan smiling in professional workplace setting" 
+                         class="w-full h-auto rounded-lg object-cover mb-4">
+                    <figcaption class="text-sm text-slate-600 font-medium">
+                        Alex Morgan — Accessibility Advocate & Frontend Lead
+                    </figcaption>
+                </figure>
+
+                <!-- Detailed Bio Article -->
+                <article class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <h2 class="text-2xl font-bold text-slate-900">Professional Background</h2>
+                    <p class="text-slate-700 leading-relaxed">
+                        With over 6 years of web engineering experience, I specialize in engineering web applications that score <strong>100/100 on Lighthouse Accessibility and SEO audits</strong>. I believe the web should be usable by everyone, regardless of hardware, software, language, location, or ability.
+                    </p>
+                    <p class="text-slate-700 leading-relaxed">
+                        I hold certifications in Web Accessibility (CPACC) and advocate for semantic HTML clean code. By eliminating unsemantic <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded">&lt;div&gt;</code> clutter in favor of native interactive and semantic elements, websites become naturally search engine friendly and screen-reader accessible.
+                    </p>
+
+                    <h3 class="text-xl font-bold text-slate-900 pt-4">Career Timeline</h3>
+                    <ul class="space-y-4 border-l-2 border-brand-500 pl-4 mt-2">
+                        <li>
+                            <time datetime="2022-01-01" class="text-xs font-semibold text-brand-600 tracking-wide uppercase">2022 — Present</time>
+                            <h4 class="text-base font-bold text-slate-900">Senior Frontend Accessibility Architect</h4>
+                            <p class="text-sm text-slate-600">Leading WCAG AA auditing, building semantic design systems, and improving SEO ranking.</p>
+                        </li>
+                        <li>
+                            <time datetime="2019-06-01" class="text-xs font-semibold text-brand-600 tracking-wide uppercase">2019 — 2021</time>
+                            <h4 class="text-base font-bold text-slate-900">Frontend Web Developer</h4>
+                            <p class="text-sm text-slate-600">Built responsive dynamic web apps utilizing semantic HTML5 markup and modern JavaScript frameworks.</p>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: PROJECTS ================= -->
+        <section id="page-projects" class="page-section space-y-8 hidden">
+            <header class="border-b border-slate-200 pb-4">
+                <h1 class="text-3xl font-extrabold text-slate-900">Accessible Web Projects</h1>
+                <p class="text-slate-600 mt-1">Real-world applications crafted with semantic standards and high performance.</p>
+            </header>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project Card 1 -->
+                <article class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <figure class="relative">
+                            <img src="https://placehold.co/600x350/0f172a/ffffff?text=E-Commerce+A11y+Portal" 
+                                 alt="Screenshot of accessible online store featuring high contrast controls and screen reader landmarks" 
+                                 class="w-full h-48 object-cover">
+                            <figcaption class="sr-only">E-Commerce Accessibility Platform Project</figcaption>
+                        </figure>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-0.5 rounded">Score 100 A11y</span>
+                                <time datetime="2024-03-15" class="text-xs text-slate-500">March 2024</time>
+                            </div>
+                            <h2 class="text-xl font-bold text-slate-900">Accessible E-Commerce Platform</h2>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                A fully keyboard-navigable shopping portal featuring custom screen reader notification toasts, dynamic ARIA live updates for shopping carts, and structured product schemas.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex gap-3">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-slate-700 hover:text-brand-600 font-semibold text-sm">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>Repository</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project Card 2 -->
+                <article class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <figure class="relative">
+                            <img src="https://placehold.co/600x350/1e1b4b/ffffff?text=A11y+Design+System" 
+                                 alt="Design system component gallery showcasing accessible buttons, modal dialogs, and form controls" 
+                                 class="w-full h-48 object-cover">
+                            <figcaption class="sr-only">WCAG 2.1 Compliant Design System Project</figcaption>
+                        </figure>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded">WCAG 2.1 AA</span>
+                                <time datetime="2023-11-20" class="text-xs text-slate-500">November 2023</time>
+                            </div>
+                            <h2 class="text-xl font-bold text-slate-900">Semantic UI Design System</h2>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Open-source component library providing accessible tabs, accordions, dialogs, and dropdown menus with automated visual regression tests and ARIA validation.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex gap-3">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-slate-700 hover:text-brand-600 font-semibold text-sm">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>Repository</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: SKILLS ================= -->
+        <section id="page-skills" class="page-section space-y-8 hidden">
+            <header class="border-b border-slate-200 pb-4">
+                <h1 class="text-3xl font-extrabold text-slate-900">Skills & Standards Checklist</h1>
+                <p class="text-slate-600 mt-1">Core web standards, tags, and testing methodologies utilized.</p>
+            </header>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Semantic HTML Tags List -->
+                <article class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                        <i class="fa-solid fa-code text-brand-600" aria-hidden="true"></i>
+                        <span>Implemented HTML5 Semantic Elements</span>
+                    </h2>
+                    <dl class="space-y-3 text-sm">
+                        <div class="border-b border-slate-100 pb-2">
+                            <dt class="font-bold text-slate-800 font-mono text-brand-700">&lt;header&gt; &amp; &lt;footer&gt;</dt>
+                            <dd class="text-slate-600">Defines landmark banners and document footers containing copyright and global navigation.</dd>
+                        </div>
+                        <div class="border-b border-slate-100 pb-2">
+                            <dt class="font-bold text-slate-800 font-mono text-brand-700">&lt;nav&gt;</dt>
+                            <dd class="text-slate-600">Wraps navigational links with explicit screen reader primary/secondary roles.</dd>
+                        </div>
+                        <div class="border-b border-slate-100 pb-2">
+                            <dt class="font-bold text-slate-800 font-mono text-brand-700">&lt;main&gt; &amp; &lt;section&gt;</dt>
+                            <dd class="text-slate-600">Delineates the dominant content area and distinct thematic groupings.</dd>
+                        </div>
+                        <div class="border-b border-slate-100 pb-2">
+                            <dt class="font-bold text-slate-800 font-mono text-brand-700">&lt;article&gt; &amp; &lt;aside&gt;</dt>
+                            <dd class="text-slate-600">Self-contained compositional entries and complementary supporting content.</dd>
+                        </div>
+                        <div>
+                            <dt class="font-bold text-slate-800 font-mono text-brand-700">&lt;figure&gt;, &lt;figcaption&gt;, &lt;time&gt;, &lt;mark&gt;</dt>
+                            <dd class="text-slate-600">Rich structural text semantics for dates, highlighted text, and media captions.</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <!-- Accessibility Standards -->
+                <article class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                        <i class="fa-solid fa-check-double text-green-600" aria-hidden="true"></i>
+                        <span>WCAG 2.1 AA Audit Criteria</span>
+                    </h2>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-0.5" aria-hidden="true"></i>
+                            <span><strong>Contrast Ratio:</strong> Minimum 4.5:1 ratio for normal body text and 3:1 for large text.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-0.5" aria-hidden="true"></i>
+                            <span><strong>Focus Visible:</strong> High-contrast focus outlines for every interactive element.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-0.5" aria-hidden="true"></i>
+                            <span><strong>Form Labels:</strong> Explicit <code class="bg-slate-100 px-1 py-0.5 rounded">for</code> and <code class="bg-slate-100 px-1 py-0.5 rounded">id</code> association on all controls.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-0.5" aria-hidden="true"></i>
+                            <span><strong>Live Announcements:</strong> <code class="bg-slate-100 px-1 py-0.5 rounded">aria-live="polite"</code> for dynamic validation feedback.</span>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: CONTACT ================= -->
+        <section id="page-contact" class="page-section space-y-8 hidden">
+            <header class="border-b border-slate-200 pb-4">
+                <h1 class="text-3xl font-extrabold text-slate-900">Contact & Feedback</h1>
+                <p class="text-slate-600 mt-1">An accessible, tab-navigable contact form equipped with ARIA real-time validation.</p>
+            </header>
+
+            <div class="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
+                <!-- Form Feedback Notification Banner -->
+                <div id="form-status-banner" class="hidden mb-6 p-4 rounded-lg text-sm font-medium" role="alert" aria-live="assertive"></div>
+
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6" novalidate>
+                    <!-- Full Name Field -->
+                    <div class="space-y-2">
+                        <label for="user-name" class="block text-sm font-bold text-slate-900">
+                            Full Name <span class="text-red-600" aria-hidden="true">*</span>
+                        </label>
+                        <input type="text" 
+                               id="user-name" 
+                               name="name" 
+                               required 
+                               aria-required="true" 
+                               aria-describedby="name-hint name-error" 
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-brand-600 focus:ring-1 focus:ring-brand-600 text-slate-900 text-sm shadow-sm"
+                               placeholder="e.g. Jane Doe">
+                        <p id="name-hint" class="text-xs text-slate-500">Please enter your first and last name.</p>
+                        <p id="name-error" class="hidden text-xs font-semibold text-red-600" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Email Address Field -->
+                    <div class="space-y-2">
+                        <label for="user-email" class="block text-sm font-bold text-slate-900">
+                            Email Address <span class="text-red-600" aria-hidden="true">*</span>
+                        </label>
+                        <input type="email" 
+                               id="user-email" 
+                               name="email" 
+                               required 
+                               aria-required="true" 
+                               aria-describedby="email-hint email-error" 
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-brand-600 focus:ring-1 focus:ring-brand-600 text-slate-900 text-sm shadow-sm"
+                               placeholder="jane.doe@example.com">
+                        <p id="email-hint" class="text-xs text-slate-500">We will never share your email address.</p>
+                        <p id="email-error" class="hidden text-xs font-semibold text-red-600" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Subject Field -->
+                    <div class="space-y-2">
+                        <label for="user-subject" class="block text-sm font-bold text-slate-900">
+                            Inquiry Subject <span class="text-red-600" aria-hidden="true">*</span>
+                        </label>
+                        <select id="user-subject" 
+                                name="subject" 
+                                required 
+                                aria-required="true"
+                                class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-brand-600 focus:ring-1 focus:ring-brand-600 text-slate-900 text-sm shadow-sm bg-white">
+                            <option value="">Select a subject...</option>
+                            <option value="accessibility-audit">Accessibility Audit Request</option>
+                            <option value="project-consultation">Project Consultation</option>
+                            <option value="general">General Collaboration</option>
+                        </select>
+                        <p id="subject-error" class="hidden text-xs font-semibold text-red-600" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Message Field -->
+                    <div class="space-y-2">
+                        <label for="user-message" class="block text-sm font-bold text-slate-900">
+                            Message <span class="text-red-600" aria-hidden="true">*</span>
+                        </label>
+                        <textarea id="user-message" 
+                                  name="message" 
+                                  rows="5" 
+                                  required 
+                                  aria-required="true" 
+                                  aria-describedby="message-error"
+                                  class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:border-brand-600 focus:ring-1 focus:ring-brand-600 text-slate-900 text-sm shadow-sm"
+                                  placeholder="Type your message here..."></textarea>
+                        <p id="message-error" class="hidden text-xs font-semibold text-red-600" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Accessible Checkbox Control -->
+                    <div class="flex items-start space-x-3">
+                        <input type="checkbox" 
+                               id="user-consent" 
+                               name="consent" 
+                               required 
+                               aria-required="true" 
+                               class="h-4 w-4 text-brand-600 border-slate-300 rounded focus:ring-brand-500 mt-1">
+                        <label for="user-consent" class="text-sm text-slate-700">
+                            I agree to allow storing my submitted information for processing this inquiry. <span class="text-red-600" aria-hidden="true">*</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                            class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition focus:ring-4 focus:ring-brand-300 flex justify-center items-center space-x-2">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        <span>Send Accessible Message</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Semantic Footer with Contentinfo Role -->
+    <footer role="contentinfo" class="bg-slate-900 text-slate-300 border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div class="space-y-1 text-center md:text-left">
+                <p class="text-sm font-semibold text-white">Alex Morgan — Accessibility & Frontend Engineer</p>
+                <p class="text-xs text-slate-400">
+                    &copy; <time id="copyright-year">2026</time> All rights reserved. Built strictly adhering to HTML5 Semantic Standards &amp; WCAG 2.1 AA Guidelines.
+                </p>
+            </div>
+
+            <!-- Footer Navigation & Social Links -->
+            <nav aria-label="Footer Social Navigation" class="flex space-x-6">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition p-1" aria-label="Alex Morgan GitHub Profile (opens in new tab)">
+                    <i class="fa-brands fa-github text-xl" aria-hidden="true"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition p-1" aria-label="Alex Morgan LinkedIn Profile (opens in new tab)">
+                    <i class="fa-brands fa-linkedin text-xl" aria-hidden="true"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition p-1" aria-label="Alex Morgan Twitter Profile (opens in new tab)">
+                    <i class="fa-brands fa-x-twitter text-xl" aria-hidden="true"></i>
+                </a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        /**
+         * Navigation Handler for Single Page Application Multi-Page feel
+         * Handles ARIA roles, page titles, screen reader announcements, and focus management.
+         */
+        function navigateTo(pageId, pageTitle) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            // Show selected page
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+
+            // Update document title for SEO & screen reader context
+            document.title = `Alex Morgan - Accessible Portfolio | ${pageTitle}`;
+
+            // Update nav active states (desktop & mobile)
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-300', 'hover:bg-slate-800', 'hover:text-white');
+                btn.removeAttribute('aria-current');
+            });
+
+            const activeDesktopBtn = document.getElementById(`nav-${pageId}`);
+            if (activeDesktopBtn) {
+                activeDesktopBtn.classList.remove('text-slate-300', 'hover:bg-slate-800');
+                activeDesktopBtn.classList.add('bg-brand-600', 'text-white', 'shadow-sm');
+                activeDesktopBtn.setAttribute('aria-current', 'page');
+            }
+
+            // Announce page change to screen reader users
+            announceToScreenReader(`Navigated to ${pageTitle} page.`);
+
+            // Move focus to main content region for seamless keyboard flow
+            const mainContent = document.getElementById('main-content');
+            mainContent.focus();
+
+            // Scroll smoothly to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Mobile Navigation Menu Toggle
+         */
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const icon = document.getElementById('menu-icon');
+
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+
+            if (isExpanded) {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+                announceToScreenReader('Mobile menu closed');
+            } else {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                announceToScreenReader('Mobile menu expanded');
+            }
+        }
+
+        /**
+         * Dynamic Screen Reader Live Announcement helper
+         */
+        function announceToScreenReader(message) {
+            const announcer = document.getElementById('sr-announcer');
+            if (announcer) {
+                announcer.textContent = message;
+            }
+        }
+
+        /**
+         * Contact Form Accessible Validation Handler
+         */
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const nameInput = document.getElementById('user-name');
+            const emailInput = document.getElementById('user-email');
+            const subjectInput = document.getElementById('user-subject');
+            const messageInput = document.getElementById('user-message');
+            const consentInput = document.getElementById('user-consent');
+
+            const statusBanner = document.getElementById('form-status-banner');
+            let isValid = true;
+
+            // Clear existing errors
+            clearError('name-error', nameInput);
+            clearError('email-error', emailInput);
+            clearError('subject-error', subjectInput);
+            clearError('message-error', messageInput);
+
+            // Validate Name
+            if (!nameInput.value.trim()) {
+                showError('name-error', nameInput, 'Please provide your full name.');
+                isValid = false;
+            }
+
+            // Validate Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+                showError('email-error', emailInput, 'Please enter a valid email address.');
+                isValid = false;
+            }
+
+            // Validate Subject
+            if (!subjectInput.value) {
+                showError('subject-error', subjectInput, 'Please select an inquiry subject.');
+                isValid = false;
+            }
+
+            // Validate Message
+            if (!messageInput.value.trim()) {
+                showError('message-error', messageInput, 'Please enter a message before sending.');
+                isValid = false;
+            }
+
+            // Validate Consent
+            if (!consentInput.checked) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                statusBanner.className = 'mb-6 p-4 rounded-lg text-sm font-medium bg-red-100 text-red-900 border border-red-300';
+                statusBanner.textContent = 'Form submission failed. Please resolve the highlighted errors above.';
+                statusBanner.classList.remove('hidden');
+                announceToScreenReader('Form validation failed. Please correct the input errors.');
+                return;
+            }
+
+            // Successful Submission
+            statusBanner.className = 'mb-6 p-4 rounded-lg text-sm font-medium bg-green-100 text-green-900 border border-green-300';
+            statusBanner.textContent = 'Thank you! Your message has been sent successfully. We will reply shortly.';
+            statusBanner.classList.remove('hidden');
+            announceToScreenReader('Thank you! Your message was submitted successfully.');
+
+            // Reset Form Fields
+            form.reset();
+        }
+
+        function showError(errorId, inputElement, message) {
+            const errorElem = document.getElementById(errorId);
+            if (errorElem) {
+                errorElem.textContent = message;
+                errorElem.classList.remove('hidden');
+            }
+            inputElement.setAttribute('aria-invalid', 'true');
+            inputElement.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+        }
+
+        function clearError(errorId, inputElement) {
+            const errorElem = document.getElementById(errorId);
+            if (errorElem) {
+                errorElem.textContent = '';
+                errorElem.classList.add('hidden');
+            }
+            inputElement.removeAttribute('aria-invalid');
+            inputElement.classList.remove('border-red-500', 'ring-1', 'ring-red-500');
+        }
+    </script>
+</body>
+</html>
